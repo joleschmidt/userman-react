@@ -4,7 +4,6 @@ import {ToDoEntry} from '../model/ToDoEntry';
 function List(props: { items: ToDoEntry[], onStatusChange: (user: ToDoEntry) => void }) {
     const rows = props.items.map((user) => (
         <tr key={user.id}>
-            <td>{user.title}</td>
             <td>{user.fname}</td>
             <td>{user.lname}</td>
             <td>{user.uname}</td>
@@ -24,7 +23,6 @@ function List(props: { items: ToDoEntry[], onStatusChange: (user: ToDoEntry) => 
         <Table>
             <thead>
             <tr>
-                <th>Name</th>
                 <th>Vorname</th>
                 <th>Nachname</th>
                 <th>Benutzername</th>

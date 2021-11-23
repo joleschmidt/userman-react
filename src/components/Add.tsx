@@ -1,35 +1,24 @@
 import {Button, Form} from 'react-bootstrap';
-import React, {ChangeEvent, FormEvent} from 'react';
+import React, {ChangeEvent, FormEvent, useState} from 'react';
 
-export class Add extends React.Component<{ onCreate: (title: string, fname: string, lname: string, uname: string, pwd: string, discription: string ) => void }, { value: string, fname: string, lname: string, uname: string, pwd: string, discription: string }> {
-    constructor(props: { onCreate: (title: string, fname: string, lname: string, uname: string, pwd: string, discription:string ) => void }) {
+export class Add extends React.Component<{ onCreate: (fname: string, lname: string, uname: string, pwd: string, discription: string ) => void }, {fname: string, lname: string, uname: string, pwd: string, discription: string }> {
+
+
+    constructor(props: { onCreate: (fname: string, lname: string, uname: string, pwd: string, discription: string ) => void }) {
         super(props);
+
         this.state = {
-            value: '',
-            fname: '',
-            lname: '',
-            uname: '',
-            pwd: '',
-            discription: '',
+            fname: 'Jan Ole',
+            lname: 'Schmidt',
+            uname: 'joleschmidt',
+            pwd: '4444',
+            discription: '5555',
         };
-
-    }
-
-    handleChange(event: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
-        this.setState({
-            value: event.target.value,
-            fname: event.target.value,
-            lname: event.target.value,
-            uname: event.target.value,
-            pwd: event.target.value,
-            discription: event.target.value,
-        });
     }
 
     handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         this.props.onCreate(
-            this.state.value,
             this.state.fname,
             this.state.lname,
             this.state.uname,
@@ -45,33 +34,52 @@ export class Add extends React.Component<{ onCreate: (title: string, fname: stri
                 <Form onSubmit={(e) => this.handleSubmit(e)}>
                     <div>
                         <p>Vorname</p>
-                        <Form.Control value={this.state.fname}
-                                      onChange={(e) => this.handleChange(e)}
-                                      type="text" placeholder="Vorname" style={{margin: '8px 0'}}/>
+                        <Form.Control
+                            name="fname"
+                            value={this.state.fname}
+                            onChange={e => this.setState({fname: e.target.value})}
+                            type="text"
+                            placeholder="Vorname"
+                            style={{margin: '8px 0'}}/>
                     </div>
                     <div>
                         <p>Nachname</p>
-                        <Form.Control value={this.state.lname}
-                                      onChange={(e) => this.handleChange(e)}
-                                      type="text" placeholder="Nachname" style={{margin: '8px 0'}}/>
+                        <Form.Control
+                            name="lname"
+                            value={this.state.lname}
+                            onChange={e => this.setState({lname: e.target.value})}
+                            type="text"
+                            placeholder="Nachname"
+                            style={{margin: '8px 0'}}/>
                     </div>
                     <div>
                         <p>Username</p>
-                        <Form.Control value={this.state.uname}
-                                      onChange={(e) => this.handleChange(e)}
-                                      type="text" placeholder="max123" style={{margin: '8px 0'}}/>
+                        <Form.Control
+                            name="uname"
+                            value={this.state.uname}
+                            onChange={e => this.setState({uname: e.target.value})}
+                            type="text" placeholder="max123"
+                            style={{margin: '8px 0'}}/>
                     </div>
                     <div>
                         <p>Passwort</p>
-                        <Form.Control value={this.state.pwd}
-                                      onChange={(e) => this.handleChange(e)}
-                                      type="password" placeholder="" style={{margin: '8px 0'}}/>
+                        <Form.Control
+                            name="pwd"
+                            value={this.state.pwd}
+                            onChange={e => this.setState({pwd: e.target.value})}
+                            type="password"
+                            placeholder=""
+                            style={{margin: '8px 0'}}/>
                     </div>
                     <div>
                         <p>Beschreibung</p>
-                        <Form.Control value={this.state.value}
-                                      onChange={(e) => this.handleChange(e)}
-                                      type="text" placeholder="" style={{margin: '8px 0'}}/>
+                        <Form.Control
+                            name="discription"
+                            value={this.state.discription}
+                            onChange={e => this.setState({discription: e.target.value})}
+                            type="text"
+                            placeholder=""
+                            style={{margin: '8px 0'}}/>
                     </div>
                     <Button variant="primary" type="submit">
                         Submit

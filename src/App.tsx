@@ -5,17 +5,12 @@ import {ToDoEntry} from './model/ToDoEntry';
 import List from './components/List';
 import Add from './components/Add';
 
-class App extends React.Component<{}, { title: string, fname: string, lname: string, uname: string, pwd: string, discription: string, users: ToDoEntry[] }> {
+class App extends React.Component<{}, { title: string, users: ToDoEntry[] }> {
     constructor(props: {}) {
         super(props);
         this.state = {
             title: 'Userman',
             users: [],
-            fname: '',
-            lname: '',
-            uname: '',
-            pwd: '',
-            discription: '',
         }
     }
 
@@ -27,9 +22,9 @@ class App extends React.Component<{}, { title: string, fname: string, lname: str
         }));
     }
 
-    createToDo(title: string, discription: string, fname: string, lname: string, uname: string, pwd: string) {
+    createToDo(discription: string, fname: string, lname: string, uname: string, pwd: string) {
         this.setState(state => ({
-            users: [...state.users, new ToDoEntry(title, discription, fname, lname, uname, pwd)]
+            users: [...state.users, new ToDoEntry(discription, fname, lname, uname, pwd)]
         }));
     }
 
@@ -46,8 +41,8 @@ class App extends React.Component<{}, { title: string, fname: string, lname: str
                               onStatusChange={(user) => this.changeStatus(user)}/>
                     </Col>
                     <Col md={3}>
-                        <Add onCreate={(title, fname, lname, uname, pwd, discription) =>
-                            this.createToDo(title, fname, lname, uname, pwd, discription)}/>
+                        <Add onCreate={(fname, lname, uname, pwd, discription) =>
+                            this.createToDo( fname, lname, uname, pwd, discription)}/>
 
                     </Col>
                 </Row>
